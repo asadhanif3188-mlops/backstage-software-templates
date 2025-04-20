@@ -3,7 +3,7 @@ kind: Template
 # some metadata about the template itself
 metadata:
   name: python-template
-  title: Python Flask template
+  title: Python Flask Template
   description: Provides a basic Flask application with end-to-end deployment.
 spec:
   owner: development
