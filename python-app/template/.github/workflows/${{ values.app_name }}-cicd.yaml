@@ -1,4 +1,4 @@
-name: CICD
+name: ${{ values.app_name }}-CICD
 on: 
   push:
     paths:
@@ -19,16 +19,16 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ '${{ secrets.DOCKERHUB_USERNAME }}' }}
+          password: ${{ '${{ secrets.DOCKERHUB_TOKEN }}' }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: asadhanif3188/python-with-argocd:${{ env.COMMIT_ID }}
+          tags: asadhanif3188/${{ values.app_name }}:${{ '${{ env.COMMIT_ID }}' }}
     outputs:
-      commit_id: ${{ env.COMMIT_ID }}
+      commit_id: ${{ '${{ env.COMMIT_ID }}' }}
 
   cd:
     name: Deploy Application using ArgoCD
@@ -42,14 +42,14 @@ jobs:
       - name: Modify values file
         shell: bash
         run: |
-          echo ${{needs.ci.outputs.commit_id}}
+          echo ${{ '${{needs.ci.outputs.commit_id}}' }}
           pip install yq
-          yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/python-app/values.yaml
+          yq -Yi '.image.tag = "${{ '${{needs.ci.outputs.commit_id}}' }}"' charts/${{ values.app_name }}/values-${{ values.app_env }}.yaml
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          message: 'Updates values.yaml with commit ${{needs.ci.outputs.commit_id}}'
+          message: 'Updates values.yaml with commit ${{ '${{needs.ci.outputs.commit_id}}' }}'
 
       - name: Install argocd
         shell: bash
@@ -66,5 +66,5 @@ jobs:
             --insecure  \
             --grpc-web \
             --username admin \
-            --password  ${{ secrets.ARGOCD_PASSWORD }}
-          argocd app sync python-app
+            --password  ${{ '${{ secrets.ARGOCD_PASSWORD }}' }}
+          argocd app sync ${{ values.app_name }}
