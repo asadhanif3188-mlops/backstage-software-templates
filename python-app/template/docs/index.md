@@ -1,17 +1,17 @@
-# Documents for python-app
+# Documents for ${{ values.app_name }}
 
 Endpoints will be available at:
 
-- GET `python-app.test.com/health`
-- GET `python-app.test.com/info`
-- GET `python-app.test.com/time`
+- GET `${{ values.app_name }}-${{ values.app_env }}.test.com/health`
+- GET `${{ values.app_name }}-${{ values.app_env }}.test.com/info`
+- GET `${{ values.app_name }}-${{ values.app_env }}.test.com/time`
 
 More endpoints for app specific:
 
-- GET `python-app.test.com/api/v1/details`
+- GET `${{ values.app_name }}-${{ values.app_env }}.test.com/api/v1/details`
 
 Here you could expand on what each of these endpoints do.
 
 # How to access the app?
 
-You can access the app by accessing this URL: `python-app.test.com/api/v1/healthz` 
+You can access the app by accessing this URL: `${{ values.app_name }}-${{ values.app_env }}.test.com/api/v1/healthz` 
