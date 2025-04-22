@@ -33,7 +33,7 @@ spec:
   # here's the steps that are executed in series in the scaffolder backend
   steps:
     - id: fetch-base
-      name: Fetch Base
+      name: Fetch Base App from Template
       action: fetch:template
       input:
         url: ./template
@@ -49,7 +49,7 @@ spec:
     #     url: https://github.com/backstage/community/tree/main/backstage-community-sessions
 
     - id: publish
-      name: Publish
+      name: Publish/create GitHub Repository
       action: publish:github
       input:
         allowedHosts: ['github.com']
@@ -60,7 +60,7 @@ spec:
         repoVisibility: public
 
     - id: register
-      name: Register
+      name: Register the new app as Backstage component
       action: catalog:register
       input:
         repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
