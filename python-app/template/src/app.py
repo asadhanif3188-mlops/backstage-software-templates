@@ -13,7 +13,7 @@ class HealthCheck(Resource):
         return {
             'status': 'healthy',
             'version': '1.0.1',
-            'environment': os.getenv('FLASK_ENV', 'development')
+            'environment': '${{ values.app_env }}',
         }
 
 class ServerInfo(Resource):
@@ -33,9 +33,10 @@ class CurrentTime(Resource):
 class Details(Resource):
     def get(self):
         return {
-            'app_name': 'Python App with ArgoCD',
+            'app_name': '${{ values.app_name }}',
             'developer': 'Asad Hanif',
             'serving_from': 'Kubernetes',
+            'environment': '${{ values.app_env }}',
             'team_members': 'Haroon, Saqib',
             'other_members': 'Salman, Hamza, Safo',
         }
