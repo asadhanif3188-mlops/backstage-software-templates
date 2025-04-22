@@ -62,7 +62,7 @@ jobs:
       - name: Login to argocd
         shell: bash
         run: |
-          argocd login argocd-server.argocd \
+          argocd login my-argocd-server.argocd \
             --insecure  \
             --grpc-web \
             --username admin \
