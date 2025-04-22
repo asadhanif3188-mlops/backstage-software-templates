@@ -1,14 +1,14 @@
-# Python-App-with-ArgoCD
+# ${{ values.app_name }}
 
 Endpoints will be available at:
-- GET `python-app.test.com/health`
-- GET `python-app.test.com/info`
-- GET `python-app.test.com/time`
+- GET `${{ values.app_name }}.test.com/health`
+- GET `${{ values.app_name }}.test.com/info`
+- GET `${{ values.app_name }}.test.com/time`
 
 More endpoints for app specific:
-- GET `python-app.test.com/api/v1/details`
+- GET `${{ values.app_name }}.test.com/api/v1/details`
 
-## ArgoCD Deployment 
+<!-- ## ArgoCD Deployment 
 To deploy the ArgoCD with helm, we need to run following command to get the dependencies for our chart.
 
 ```
@@ -163,4 +163,4 @@ kubectl get runners
 kubectl get pods
 ```
 
-
+ -->
