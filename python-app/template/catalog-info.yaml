@@ -5,7 +5,7 @@ metadata:
   description: An example of a basic Python application, named ${{ values.app_name }}.
   annotations:
     github.com/project-slug: asadhanif3188-mlops/${{ values.app_name }}
-    # backstage.io/techdocs-ref: dir:.
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: service
   owner: development
